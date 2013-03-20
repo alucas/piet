@@ -252,23 +252,23 @@ var DisplayTable = new Class({
     },
 
     _insertEmptyRowTop: function(table) {
-        return new Element('tr.row').inject(table, 'top');
+        return new Element('div.row').inject(table, 'top');
     },
 
     _insertEmptyRowBottom: function(table) {
-        return new Element('tr.row').inject(table, 'bottom');
+        return new Element('div.row').inject(table, 'bottom');
     },
 
     _insertEmptyCellLeft: function(row) {
-        return new Element('td.cell').inject(row, 'top');
+        return new Element('div.cell').inject(row, 'top');
     },
 
     _insertEmptyCellRight: function(row) {
-        return new Element('td.cell').inject(row, 'bottom');
+        return new Element('div.cell').inject(row, 'bottom');
     },
 
     _createEmptyCell: function() {
-        return Element('td.cell');
+        return Element('div.cell');
     },
 
     _deleteRowTop: function(table) {

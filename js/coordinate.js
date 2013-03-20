@@ -22,21 +22,17 @@ function coordinate(table) {
 
     for (rn in table.childNodes) {
         row = table.childNodes[rn];
-        if (row.tagName && row.tagName.match(/^tr$/i)) {
+        if (row.tagName && row.tagName.match(/^div$/i)) {
             x = -1;
             ++y;
             for (cn in row.childNodes) {
                 col = row.childNodes[cn];
-                if (col.tagName && col.tagName.match(/^t[dh]$/i)) {
-                    var colspan = col.getAttribute('colspan');
-                    if (! colspan) colspan = 1;
-                    while (colspan--) {
-                        ++x;
-                        if (! table.coordinates[x]) table.coordinates[x] = [];
-                        table.coordinates[x][y] = col;
-                        col.x = x;
-                        col.y = y;
-                    }
+                if (col.tagName && col.tagName.match(/^div$/i)) {
+                    ++x;
+                    if (! table.coordinates[x]) table.coordinates[x] = [];
+                    table.coordinates[x][y] = col;
+                    col.x = x;
+                    col.y = y;
                 }
             }
         }
