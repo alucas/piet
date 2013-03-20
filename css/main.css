@@ -130,32 +130,76 @@ footer
     height: 50px;
 }
 
-.main
+.flex
 {
-    display:-webkit-flex;
-    display:flex;
-
-    -webkit-flex:1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
+    display: box;
+    display: -webkit-flexbox;
+    display: -moz-flexbox;
+    display: -ms-flexbox;
+    display: -o-flexbox;
+    display: flexbox;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
 }
 
-.toolsContainer
+.verticalflex
+{
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -o-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+}
+
+.flexauto
+{
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+}
+
+#main
+{
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex: 1;
+}
+
+#toolsContainer
 {
     /* debug
     background-color: blue;
     */
 
-    -webkit-order:0;
-    -webkit-flex:none;
-
     width:200px;
 }
 
-.toolsContainer div
+#toolsContainer div
 {
     margin:5px;
 }
 
-.sourcePietContainer
+#sourcePietContainer
 {
     /* debug
     background-color: red;
@@ -166,11 +210,10 @@ footer
 
     -webkit-flex-direction: column;
 
-    -webkit-order:1;
-    -webkit-flex:1;
+    -webkit-flex: 1;
 
-    min-height: 300px;
-    min-width: 300px;
+    min-height: 0px;
+    min-width: 0px;
 
     margin: 20px;
     
@@ -179,7 +222,7 @@ footer
     overflow: auto;
 }
 
-.sourcePietContainer > .row
+#sourcePietContainer > .row
 {
     /* debug
     background-color: cyan;
@@ -191,7 +234,7 @@ footer
     -webkit-flex:1;
 }
 
-.sourcePietContainer > .row > .cell
+#sourcePietContainer > .row > .cell
 {
     /* debug
     background-color: purple;
@@ -214,7 +257,7 @@ footer
     border-bottom:1px solid #aaaaaa;
 }
 
-.sourcePietContainer > .row > .cell:hover
+#sourcePietContainer > .row > .cell:hover
 {
     background-image:   linear-gradient(to bottom, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
     background-image:      -o-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
