@@ -158,7 +158,7 @@ var pietSource = new PietSource();
 var displayTable = new DisplayTable(pietSource, ID_SOURCE_PIET);
 var controler = new Controler(pietSource, displayTable);
 
-pietSource.init(DEFAULT_PIETSOURCE_WIDTH, DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_COLOR);
+pietSource.init(DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_PIETSOURCE_WIDTH, DEFAULT_COLOR);
 
 /*
 var start = new Date().getTime();
