@@ -72,7 +72,7 @@ var Controler = new Class({
         $(ID_BUTTON_DELETE_ROW).addEvent('click', this._pietSourceClosure(this._deleteRowClickCallback, this._pietSource));
         $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._pietSourceClosure(this._deleteColumnClickCallback, this._pietSource));
 
-        this._displayTable.addObserver(this);
+        this._displayTable.addObserver(this); // Init new cells' events
     },
 
     //******************************//

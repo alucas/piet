@@ -61,7 +61,7 @@ var DisplayTable = new Class({
 
                 break;
             default:
-                console.log("signal inconu");
+                console.log("Unknow signal.");
         }
 
         // Actualize the coordinates of the cells.
