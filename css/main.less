@@ -515,26 +515,33 @@ footer
 
 /* ========== Scrollbar ========== */
 
-::-webkit-scrollbar
+/* Let's get this party started */
+#sourcePietContainer::-webkit-scrollbar
 {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
 }
 
-::-webkit-scrollbar-thumb
+/* Track */
+#sourcePietContainer::-webkit-scrollbar-track
 {
-    border-radius: 7px;
-    background-color: @turquoise;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
 }
 
-::-webkit-scrollbar:horizontal
+/* Handle */
+#sourcePietContainer::-webkit-scrollbar-thumb
 {
-    border-top: 1px solid @clouds;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
-::-webkit-scrollbar:vertical
+#sourcePietContainer::-webkit-scrollbar-thumb:window-inactive
 {
-    border-left: 1px solid @clouds;
+    background: rgba(255,0,0,0.4);
 }
 
 /* ==========================================================================
