@@ -60,6 +60,8 @@ var DisplayTable = new Class({
                 this.deleteColumn(table, args[0]);
 
                 break;
+            case SIGNAL.CHANGE_COLOR:
+                break;
             default:
                 console.log("Unknow signal.");
         }
@@ -96,7 +98,7 @@ var DisplayTable = new Class({
     },
 
     updateCell: function(table, row, column) {
-        this._getCell(this._getRow(table, row + 1), column + 1).setStyle('background-color', this._pietSource.getColor(row, column));
+        this._getCell(this._getRow(table, row + 1), column + 1).setStyle('background-color', this._pietSource.getCellColor(row, column));
     },
 
     insertRow: function(table, position, rowId) {
@@ -165,7 +167,7 @@ var DisplayTable = new Class({
 
         var cells = new Elements();
         for (var i = 0; i < nbCell; i++) {
-            cells.push(this._createEmptyCell().setStyle('background-color', this._pietSource.getColor(rowId, i)));
+            cells.push(this._createEmptyCell().setStyle('background-color', this._pietSource.getCellColor(rowId, i)));
         }
 
         if (position == POSITION.TOP)
@@ -195,13 +197,13 @@ var DisplayTable = new Class({
         if (position == POSITION.LEFT)
         {
             for (var i = 0; i < nbRow; i++) {
-                cells.push(this._insertEmptyCellLeft(rows[i]).setStyle('background-color', this._pietSource.getColor(i, columnId)));
+                cells.push(this._insertEmptyCellLeft(rows[i]).setStyle('background-color', this._pietSource.getCellColor(i, columnId)));
             }
         }
         else if (position == POSITION.RIGHT)
         {
             for (var i = 0; i < nbRow; i++) {
-                cells.push(this._insertEmptyCellRight(rows[i]).setStyle('background-color', this._pietSource.getColor(i, columnId)));
+                cells.push(this._insertEmptyCellRight(rows[i]).setStyle('background-color', this._pietSource.getCellColor(i, columnId)));
             }
         }
         else
@@ -286,4 +288,56 @@ var DisplayTable = new Class({
     _deleteCellRight: function(row) {
         row.getChildren('.cell:last-child').dispose();
     }
+});
+
+var DisplayMenu = new Class({
+    Implements: Observer,
+
+    initialize: function(pietSource, colorSelectedId) {
+        this._pietSource = pietSource;
+        this._colorSelectedId = colorSelectedId;
+
+        this._pietSource.addObserver(this);
+    },
+
+    //******************************//
+    //          Public              //
+    //******************************//
+
+    update: function(signalType, args)
+    {
+        if (signalType == undefined)
+        {
+            alert("Wrong signal type!");
+        }
+
+        switch (signalType)
+        {
+            case SIGNAL.CHANGE_COLOR:
+                this.changeColor(args)
+
+                break;
+            case SIGNAL.UPDATE_TABLE:
+            case SIGNAL.UPDATE_CELL:
+            case SIGNAL.ADD_ROW:
+            case SIGNAL.ADD_COLUMN:
+            case SIGNAL.DELETE_ROW:
+            case SIGNAL.DELETE_COLUMN:
+                break;
+            default:
+                console.log("Unknow signal.");
+        }
+    },
+
+    changeColor: function(color) {
+        var colorSelectedElement = $(this._colorSelectedId);
+        if (!colorSelectedElement)
+            return;
+
+        colorSelectedElement.setStyle('background-color', color);
+    },
+
+    //******************************//
+    //          Privates            //
+    //******************************//
 });

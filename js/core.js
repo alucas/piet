@@ -45,6 +45,7 @@ var PietSource = new Class({
     init: function(nbRow, nbColumn, initialColor) {
     	this._nbRow = nbRow;
     	this._nbColumn = nbColumn;
+        this._color = initialColor;
 
 		for (var i = 0; i < this._nbRow; i++) {
 			var row = new Array();
@@ -57,22 +58,32 @@ var PietSource = new Class({
 		}
 
 		this.notifyAll(SIGNAL.UPDATE_TABLE);
+        this.notifyAll(SIGNAL.CHANGE_COLOR, this._color);
     },
 
-    getColor: function(row, column) {
+    getCellColor: function(row, column) {
         if (0 > row || row >= this._nbRow || 0 > column || column >= this._nbColumn)
             return;
 
         return this._source[row][column];
     },
 
-    setColor: function(row, column, color) {
+    drawCell: function(row, column) {
         if (0 > row || row >= this._nbRow || 0 > column || column >= this._nbColumn)
             return;
 
-        this._source[row][column] = color;
+        this._source[row][column] = this._color;
 
         this.notifyAll(SIGNAL.UPDATE_CELL, [row, column]);
+    },
+
+    setColor: function(color) {
+        if (!color)
+            return;
+
+        this._color = color;
+
+        this.notifyAll(SIGNAL.CHANGE_COLOR, this._color);
     },
 
     getNbRow: function() {
