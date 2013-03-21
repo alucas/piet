@@ -122,10 +122,8 @@ html
 
 body
 {
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex-direction: column;
+    .flex;
+    .flexVertical;
 
     height: 100%;
 
@@ -171,7 +169,7 @@ footer
     display: flex;
 }
 
-.verticalflex
+.flexVertical
 {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
@@ -185,7 +183,7 @@ footer
     flex-direction: column;
 }
 
-.flexauto
+.flexAuto
 {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
@@ -201,10 +199,8 @@ footer
 
 #main
 {
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex: 1;
+    .flex;
+    .flexAuto;
 }
 
 #toolsContainer
@@ -227,12 +223,9 @@ footer
     background-color: red;
     */
 
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex-direction: column;
-
-    -webkit-flex: 1;
+    .flex;
+    .flexVertical;
+    .flexAuto;
 
     min-height: 0px;
     min-width: 0px;
@@ -250,10 +243,8 @@ footer
     background-color: cyan;
     */
 
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex:1;
+    .flex;
+    .flexAuto;
 }
 
 #sourcePietContainer > .row > .cell
@@ -262,7 +253,7 @@ footer
     background-color: purple;
     */
 
-    -webkit-flex:1;
+    .flexAuto;
 
     min-width:20px;
     min-height:20px;
