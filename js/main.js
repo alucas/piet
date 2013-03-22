@@ -85,6 +85,37 @@ var DEFAULT_PIETSOURCE_HEIGHT = 10;
 
 // ---------------------------------------------
 
+var colorToId = function _colorToId(color)
+{
+    switch(color)
+    {
+        case COLOR.WHITE: return ID_BUTTON_COLOR_WHITE;
+        case COLOR.BLACK: return ID_BUTTON_COLOR_BLACK;
+        case COLOR.RED: return ID_BUTTON_COLOR_RED;
+        case COLOR.YELLOW: return ID_BUTTON_COLOR_YELLOW;
+        case COLOR.GREEN: return ID_BUTTON_COLOR_GREEN;
+        case COLOR.CYAN: return ID_BUTTON_COLOR_CYAN;
+        case COLOR.BLUE: return ID_BUTTON_COLOR_BLUE;
+        case COLOR.MAGENTA: return ID_BUTTON_COLOR_MAGENTA;
+        case COLOR.LIGHT_RED: return ID_BUTTON_COLOR_LIGHT_RED;
+        case COLOR.LIGHT_YELLOW: return ID_BUTTON_COLOR_LIGHT_YELLOW;
+        case COLOR.LIGHT_GREEN: return ID_BUTTON_COLOR_LIGHT_GREEN;
+        case COLOR.LIGHT_CYAN: return ID_BUTTON_COLOR_LIGHT_CYAN;
+        case COLOR.LIGHT_BLUE: return ID_BUTTON_COLOR_LIGHT_BLUE;
+        case COLOR.LIGHT_MAGENTA: return ID_BUTTON_COLOR_LIGHT_MAGENTA;
+        case COLOR.DARK_RED: return ID_BUTTON_COLOR_DARK_RED;
+        case COLOR.DARK_YELLOW: return ID_BUTTON_COLOR_DARK_YELLOW;
+        case COLOR.DARK_GREEN: return ID_BUTTON_COLOR_DARK_GREEN;
+        case COLOR.DARK_CYAN: return ID_BUTTON_COLOR_DARK_CYAN;
+        case COLOR.DARK_BLUE: return ID_BUTTON_COLOR_DARK_BLUE;
+        case COLOR.DARK_MAGENTA: return ID_BUTTON_COLOR_DARK_MAGENTA;
+    }
+
+    return null;
+}
+
+// ---------------------------------------------
+
 var Controler = new Class({
     Implements: Observer,
 
@@ -97,12 +128,9 @@ var Controler = new Class({
         $(ID_BUTTON_DELETE_ROW).addEvent('click', this._pietSourceClosure(this._deleteRowClickCallback, this._pietSource));
         $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._pietSourceClosure(this._deleteColumnClickCallback, this._pietSource));
 
-        var colorsC = [COLOR.WHITE, COLOR.BLACK, COLOR.RED, COLOR.GREEN, COLOR.BLUE, COLOR.CYAN, COLOR.MAGENTA, COLOR.YELLOW, COLOR.DARK_RED, COLOR.DARK_GREEN, COLOR.DARK_BLUE, COLOR.DARK_CYAN, COLOR.DARK_MAGENTA, COLOR.DARK_YELLOW, COLOR.LIGHT_RED, COLOR.LIGHT_GREEN, COLOR.LIGHT_BLUE, COLOR.LIGHT_CYAN, COLOR.LIGHT_MAGENTA, COLOR.LIGHT_YELLOW];
-        var colorsE = [ID_BUTTON_COLOR_WHITE, ID_BUTTON_COLOR_BLACK, ID_BUTTON_COLOR_RED, ID_BUTTON_COLOR_GREEN, ID_BUTTON_COLOR_BLUE, ID_BUTTON_COLOR_CYAN, ID_BUTTON_COLOR_MAGENTA, ID_BUTTON_COLOR_YELLOW, ID_BUTTON_COLOR_DARK_RED, ID_BUTTON_COLOR_DARK_GREEN, ID_BUTTON_COLOR_DARK_BLUE, ID_BUTTON_COLOR_DARK_CYAN, ID_BUTTON_COLOR_DARK_MAGENTA, ID_BUTTON_COLOR_DARK_YELLOW, ID_BUTTON_COLOR_LIGHT_RED, ID_BUTTON_COLOR_LIGHT_GREEN, ID_BUTTON_COLOR_LIGHT_BLUE, ID_BUTTON_COLOR_LIGHT_CYAN, ID_BUTTON_COLOR_LIGHT_MAGENTA, ID_BUTTON_COLOR_LIGHT_YELLOW];
-        for (var i = colorsE.length - 1; i >= 0; i--) {
-            $(colorsE[i]).addEvent('click', this._pietSourceClosure(this._selectColorClickCallback, this._pietSource, colorsC[i]));
+        for (var key in COLOR) {
+            $(colorToId(COLOR[key])).addEvent('click', this._pietSourceClosure(this._selectColorClickCallback, this._pietSource, COLOR[key]));
         };
-
 
         this._displayTable.addObserver(this); // Init new cells' events
     },
