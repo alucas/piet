@@ -93,6 +93,90 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+@nice-blue: #5B83AD;
+@lightcyan: #2FE2BF;
+@turquoise: #1ABC9C;
+@green-sea: #16A085;
+@lightgreen: #55D98D;
+@emerald: #2ECC71;
+@nephritis: #27AE60;
+@lightblue: #5DADE2;
+@petermann-river: #3498DB;
+@belize-hole: #2980B9;
+@lightmagenta: #A572C7;
+@amethyst: #9B59B6;
+@wisteria: #8E44AD;
+@wet-asphalt: #34495E;
+@mignight-blue: #2C3E50;
+@concrete: #95A5A6;
+@asbestos: #7F8C8D;
+@clouds: #ECF0F1;
+@silver: #BDC3C7;
+@lightred: #EC7063;
+@alizarin: #E74C3C;
+@pome-granate: #C0392B;
+@carrot: #E67E22;
+@pumpkin: #D35400;
+@lightyellow: #F4D03F;
+@sun-flower: #F1C40F;
+@orange: #F39C12;
+
+.flex
+{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+
+.flexWrap
+{
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flexVertical
+{
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+}
+
+.flexAuto
+{
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+}
+
+.flexOrder (@order)
+{
+    -webkit-order: @order;
+    -moz-order: @order;
+    -ms-order: @order;
+    -o-order: @order;
+    order: @order;
+}
+
+.userSelect (@value)
+{
+    -webkit-user-select: @value;
+    -moz-user-select: @value;
+    -ms-user-select: @value;
+    -o-user-select: @value;
+    user-select: @value;
+}
+
+/* ==================== */
+
 html
 {
     height: 100%;
@@ -100,144 +184,269 @@ html
 
 body
 {
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex-direction: column;
+    .flex;
+    .flexVertical;
 
     height: 100%;
-
-    background-image: url("../img/background/noisy_net_2X.png");
 
     color: #cccccc;
 }
 
 header
 {
-    /* debug
-    background-color: green;
-    */
+    background-color: @petermann-river;
 
     height: 50px;
 }
 
 footer
 {
-    /* debug
-    background-color: yellow;
-    */
+    background-color: @belize-hole;
 
     height: 50px;
 }
 
-.main
+#main
 {
-    display:-webkit-flex;
-    display:flex;
-
-    -webkit-flex:1;
+    .flex;
+    .flexAuto;
 }
 
-.toolsContainer
+#toolsContainer
 {
-    /* debug
-    background-color: blue;
-    */
-
-    -webkit-order:0;
-    -webkit-flex:none;
-
     width:200px;
 }
 
-.toolsContainer div
+#toolsContainer .label
 {
-    margin:5px;
+    .flexAuto;
+
+    .userSelect(none);
+
+    color: @wet-asphalt;
+
+    line-height: 30px;
 }
 
-.sourcePietContainer
+.box
 {
-    /* debug
-    background-color: red;
-    */
+    margin: 10px;
+    margin-right: 0px;
+    padding: 10px;
 
-    display: -webkit-flex;
-    display: flex;
+    border-radius: 5px;
 
-    -webkit-flex-direction: column;
-
-    -webkit-order:1;
-    -webkit-flex:1;
-
-    min-height: 300px;
-    min-width: 300px;
-
-    margin: 20px;
-    
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-
-    overflow: auto;
+    background-color: @clouds;
 }
 
-.sourcePietContainer > .row
+.boxLine
 {
-    /* debug
-    background-color: cyan;
-    */
-
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex:1;
+    .flex;
 }
 
-.sourcePietContainer > .row > .cell
+.boxLine + .boxLine
 {
-    /* debug
-    background-color: purple;
-    */
+    margin-top: 5px;
+}
 
-    -webkit-flex:1;
+#colorSelected
+{
+    @size:170px;
+    height: @size;
+    width: @size;
+}
+
+.colorsBox
+{
+    .flex;
+    .flexWrap;
+}
+
+.colorsBox > div
+{
+    @size: 28px;
+    width: @size;
+    height: @size;
+}
+
+#colorWhite
+{
+    .flexOrder(19);
+
+    @size: 84px;
+    width: @size;
+
+    background-color: white;
+}
+
+#colorBlack
+{
+    .flexOrder(20);
+
+    @size: 84px;
+    width: @size;
+
+    background-color: @mignight-blue;
+}
+
+#colorRed
+{
+    .flexOrder(7);
+    background-color: @alizarin;
+}
+
+#colorYellow
+{
+    .flexOrder(8);
+    background-color: @sun-flower;
+}
+#colorGreen
+{
+    .flexOrder(9);
+    background-color: @emerald;
+}
+#colorCyan
+{
+    .flexOrder(10);
+    background-color: @turquoise;
+}
+#colorBlue
+{
+    .flexOrder(11);
+    background-color: @petermann-river;
+}
+#colorMagenta
+{
+    .flexOrder(12);
+    background-color: @amethyst;
+}
+#colorLightRed
+{
+    .flexOrder(1);
+    background-color: @lightred;
+}
+#colorLightYellow
+{
+    .flexOrder(2);
+    background-color: @lightyellow;
+}
+#colorLightGreen
+{
+    .flexOrder(3);
+    background-color: @lightgreen;
+}
+#colorLightCyan
+{
+    .flexOrder(4);
+    background-color: @lightcyan;
+}
+#colorLightBlue
+{
+    .flexOrder(5);
+    background-color: @lightblue;
+}
+#colorLightMagenta
+{
+    .flexOrder(6);
+    background-color: @lightmagenta;
+}
+#colorDarkRed
+{
+    .flexOrder(13);
+    background-color: @pome-granate;
+}
+#colorDarkYellow
+{
+    .flexOrder(14);
+    background-color: @orange;
+}
+#colorDarkGreen
+{
+    .flexOrder(15);
+    background-color: @nephritis;
+}
+#colorDarkCyan
+{
+    .flexOrder(16);
+    background-color: @green-sea;
+}
+#colorDarkBlue
+{
+    .flexOrder(17);
+    background-color: @belize-hole;
+}
+#colorDarkMagenta
+{
+    .flexOrder(18);
+    background-color: @wisteria;
+}
+
+.instructionsBox
+{
+    .flex;
+    .flexWrap;
+}
+
+.instructionsBox > div
+{
+    width: 56px;
+    height: 30px;
+
+    color: @wet-asphalt;
+
+    .userSelect(none);
+}
+
+#sourcePietContainer
+{
+    .flex;
+    .flexVertical;
+    .flexAuto;
+
+    min-height: 0px;
+    min-width: 0px;
+
+    margin: 10px;
+
+    border: 10px solid @clouds;
+    border-radius: 5px;
+
+    overflow-x: auto;
+}
+
+#sourcePietContainer > .row
+{
+    .flex;
+    .flexAuto;
+}
+
+#sourcePietContainer > .row > .cell
+{
+    .flexAuto;
 
     min-width:20px;
     min-height:20px;
     
-    background-image:   linear-gradient(to bottom, rgba(234,234,234, 0) 0%, rgba(229,229,229, 0.1) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image:      -o-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(229,229,229, 0.1) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image:     -ms-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(229,229,229, 0.1) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image:    -moz-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(229,229,229, 0.1) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image: -webkit-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(229,229,229, 0.1) 60%, rgba(217,217,217, 0.1) 100%);
-    
     box-shadow: inset 1px 1px rgba(255, 255, 255, 0.5);
 
-    border-right:1px solid #aaaaaa;
-    border-bottom:1px solid #aaaaaa;
-}
-
-.sourcePietContainer > .row > .cell:hover
-{
-    background-image:   linear-gradient(to bottom, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image:      -o-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image:     -ms-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image:    -moz-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
-    background-image: -webkit-linear-gradient(top, rgba(234,234,234, 0) 0%, rgba(129,129,129, 0.2) 60%, rgba(217,217,217, 0.1) 100%);
+    border-right:1px solid @clouds;
+    border-bottom:1px solid @clouds;
 }
 
 /* ======================== */
 
 .button
 {
-    background-color:#3d4555;
-    background-image:linear-gradient(transparent, rgba(0, 0, 0, 0.2));
-    border:1px solid #000000;
-    border-radius:3px;
-    box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.15),inset 0 0 5px rgba(255, 255, 255, 0.05);
-    color:#aaaaaa;
-    font-family:sans-serif;
+    background-color: @emerald;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    font-family: sans-serif;
     font-size:10pt;
     padding:0.5em;
     text-decoration:none;
-    text-shadow:0 1px 0 black;
+
+    -webkit-transition: background-color 0.5s;
 }
 
 .buttonGroup
@@ -254,7 +463,6 @@ footer
 .buttonGroup>.button+.button
 {
     border-left:none;
-    box-shadow: 
 }
 
 .buttonGroup>.button:first-child
@@ -271,12 +479,11 @@ footer
 
 .button:hover
 {
-    background-color:#485164;
+    background-color: @nephritis;
 }
 
 .button:active{
-    background:#323946;
-    box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.4),inset 0 5px 10px rgba(0, 0, 0, 0.2);
+    background: @nephritis;
 }
 
 .button:focus
@@ -307,6 +514,35 @@ footer
 }
 
 /* ========== Scrollbar ========== */
+
+/* Let's get this party started */
+#sourcePietContainer::-webkit-scrollbar
+{
+    width: 12px;
+    height: 12px;
+}
+
+/* Track */
+#sourcePietContainer::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+#sourcePietContainer::-webkit-scrollbar-thumb
+{
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+#sourcePietContainer::-webkit-scrollbar-thumb:window-inactive
+{
+    background: rgba(255,0,0,0.4);
+}
 
 /* ==========================================================================
    Helper classes
