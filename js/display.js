@@ -293,9 +293,8 @@ var DisplayTable = new Class({
 var DisplayMenu = new Class({
     Implements: Observer,
 
-    initialize: function(pietSource, colorSelectedId) {
+    initialize: function(pietSource) {
         this._pietSource = pietSource;
-        this._colorSelectedId = colorSelectedId;
 
         this._pietSource.addObserver(this);
     },
@@ -314,7 +313,7 @@ var DisplayMenu = new Class({
         switch (signalType)
         {
             case SIGNAL.CHANGE_COLOR:
-                this.changeColor(args[0], args[1])
+                this.changeColor(args[0], args[1]);
 
                 break;
             case SIGNAL.UPDATE_TABLE:
@@ -330,11 +329,12 @@ var DisplayMenu = new Class({
     },
 
     changeColor: function(oldColor, newColor) {
-        var colorSelectedElement = $(this._colorSelectedId);
-        if (!colorSelectedElement)
-            return;
+        if(oldColor)
+        {
+            $(colorToId(oldColor)).removeClass('colorSelected');
+        }
 
-        colorSelectedElement.setStyle('background-color', newColor);
+        $(colorToId(newColor)).addClass('colorSelected');
     },
 
     //******************************//

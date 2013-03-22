@@ -94,16 +94,12 @@ textarea {
    ========================================================================== */
 
 @nice-blue: #5B83AD;
-@lightcyan: #2FE2BF;
 @turquoise: #1ABC9C;
 @green-sea: #16A085;
-@lightgreen: #55D98D;
 @emerald: #2ECC71;
 @nephritis: #27AE60;
-@lightblue: #5DADE2;
 @petermann-river: #3498DB;
 @belize-hole: #2980B9;
-@lightmagenta: #A572C7;
 @amethyst: #9B59B6;
 @wisteria: #8E44AD;
 @wet-asphalt: #34495E;
@@ -112,12 +108,10 @@ textarea {
 @asbestos: #7F8C8D;
 @clouds: #ECF0F1;
 @silver: #BDC3C7;
-@lightred: #EC7063;
 @alizarin: #E74C3C;
 @pome-granate: #C0392B;
 @carrot: #E67E22;
 @pumpkin: #D35400;
-@lightyellow: #F4D03F;
 @sun-flower: #F1C40F;
 @orange: #F39C12;
 
@@ -173,6 +167,15 @@ textarea {
     -ms-user-select: @value;
     -o-user-select: @value;
     user-select: @value;
+}
+
+.transition (@property, @duration)
+{
+    -webkit-transition: @property @duration;
+    -moz-transition: @property @duration;
+    -ms-transition: @property @duration;
+    -o-transition: @property @duration;
+    transition: @property @duration;
 }
 
 /* ==================== */
@@ -251,15 +254,6 @@ footer
     margin-top: 5px;
 }
 
-#colorSelected
-{
-    @size:170px;
-    height: @size;
-    width: @size;
-
-    border-radius: 5px;
-}
-
 .colorsBox
 {
     .flex;
@@ -273,6 +267,18 @@ footer
     height: @size;
 
     cursor:pointer;
+
+    .transition(border-radius, 0.5s);
+}
+
+.colorsBox > div:hover
+{
+    .colorSelected;
+}
+
+.colorSelected
+{
+    border-radius: 14px;
 }
 
 .colorWhite { background-color: white; }
@@ -283,12 +289,12 @@ footer
 .colorCyan { background-color: @turquoise; }
 .colorBlue { background-color: @petermann-river; }
 .colorMagenta { background-color: @amethyst; }
-.colorLightRed { background-color: @lightred; }
-.colorLightYellow { background-color: @lightyellow; }
-.colorLightGreen { background-color: @lightgreen; }
-.colorLightCyan { background-color: @lightcyan; }
-.colorLightBlue { background-color: @lightblue; }
-.colorLightMagenta { background-color: @lightmagenta; }
+.colorLightRed { background-color: lighten(@alizarin, 10%); }
+.colorLightYellow { background-color: lighten(@sun-flower, 10%); }
+.colorLightGreen { background-color: lighten(@emerald, 10%); }
+.colorLightCyan { background-color: lighten(@turquoise, 10%); }
+.colorLightBlue { background-color: lighten(@petermann-river, 10%); }
+.colorLightMagenta { background-color: lighten(@amethyst, 10%); }
 .colorDarkRed { background-color: @pome-granate; }
 .colorDarkYellow { background-color: @orange; }
 .colorDarkGreen { background-color: @nephritis; }
@@ -302,7 +308,10 @@ footer
 
     .colorWhite;
 
-    width: 84px;
+    width: 84px - 2px;
+    height: 28px - 2px;
+
+    border: 1px solid @wet-asphalt;
 }
 
 #colorBlack

@@ -34,8 +34,6 @@ var ID_BUTTON_COLOR_DARK_CYAN = 'colorDarkCyan';
 var ID_BUTTON_COLOR_DARK_BLUE = 'colorDarkBlue';
 var ID_BUTTON_COLOR_DARK_MAGENTA = 'colorDarkMagenta';
 
-var ID_COLOR_SELECTED = "colorSelected";
-
 var POSITION = {
     TOP: 0,
     BOTTOM: 1,
@@ -223,7 +221,7 @@ var Controler = new Class({
 
 var pietSource = new PietSource();
 var displayTable = new DisplayTable(pietSource, ID_SOURCE_PIET);
-var displayMenu = new DisplayMenu(pietSource, ID_COLOR_SELECTED);
+var displayMenu = new DisplayMenu(pietSource);
 var controler = new Controler(pietSource, displayTable);
 
 pietSource.init(DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_PIETSOURCE_WIDTH, DEFAULT_COLOR);
