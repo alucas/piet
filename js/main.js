@@ -183,7 +183,7 @@ var Controler = new Class({
     _pietSourceClosure: function(fn) {
         // get arguments[1:]
         // we can't call "slice" directly because "arguments" is typed as an Object
-        var args = [].slice.call(arguments, 1, arguments.length + 1);
+        var args = [].slice.call(arguments, 1);
 
         return function (event) {
             fn.apply(this, [event].concat(args));
