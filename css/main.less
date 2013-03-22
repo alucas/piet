@@ -262,18 +262,18 @@ footer
     .flexWrap;
 }
 
-.colorsBox > div
+.colorsBox > button
 {
     @size: 28px;
     width: @size;
     height: @size;
 
-    cursor:pointer;
+    border: none;
 
     .transition(border-radius, 0.5s);
 }
 
-.colorsBox > div:hover
+.colorsBox > button:hover
 {
     .colorSelected;
 }
@@ -310,8 +310,7 @@ footer
 
     .colorWhite;
 
-    width: 84px - 2px;
-    height: 28px - 2px;
+    width: 84px;
 
     border: 1px solid @wet-asphalt;
 }
