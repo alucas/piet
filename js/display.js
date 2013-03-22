@@ -314,7 +314,7 @@ var DisplayMenu = new Class({
         switch (signalType)
         {
             case SIGNAL.CHANGE_COLOR:
-                this.changeColor(args)
+                this.changeColor(args[0], args[1])
 
                 break;
             case SIGNAL.UPDATE_TABLE:
@@ -329,12 +329,12 @@ var DisplayMenu = new Class({
         }
     },
 
-    changeColor: function(color) {
+    changeColor: function(oldColor, newColor) {
         var colorSelectedElement = $(this._colorSelectedId);
         if (!colorSelectedElement)
             return;
 
-        colorSelectedElement.setStyle('background-color', color);
+        colorSelectedElement.setStyle('background-color', newColor);
     },
 
     //******************************//

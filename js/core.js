@@ -58,7 +58,7 @@ var PietSource = new Class({
 		}
 
 		this.notifyAll(SIGNAL.UPDATE_TABLE);
-        this.notifyAll(SIGNAL.CHANGE_COLOR, this._color);
+        this.notifyAll(SIGNAL.CHANGE_COLOR, [null, this._color]);
     },
 
     getCellColor: function(row, column) {
@@ -81,9 +81,10 @@ var PietSource = new Class({
         if (!color)
             return;
 
+        var oldColor = this._color;
         this._color = color;
 
-        this.notifyAll(SIGNAL.CHANGE_COLOR, this._color);
+        this.notifyAll(SIGNAL.CHANGE_COLOR, [oldColor, this._color]);
     },
 
     getNbRow: function() {
