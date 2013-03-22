@@ -456,16 +456,23 @@ footer
     .flexWrap;
 }
 
-.instructionsBox > div
+.instructionsBox > button
 {
     width: 56px;
     height: 30px;
 
     color: @wet-asphalt;
 
-    .userSelect(none);
+    border: none;
 
-    cursor:pointer;
+    text-align: left;
+
+    .transition(background-color, 0.5s);
+}
+
+.instructionsBox > button:hover
+{
+    background-color: darken(@clouds, 20%);
 }
 
 #sourcePietContainer
