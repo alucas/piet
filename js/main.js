@@ -124,17 +124,17 @@ var Controler = new Class({
         this._pietSource = pietSource;
         this._displayTable = displayTable;
 
-        $(ID_BUTTON_ADD_ROW).addEvent('click', this._pietSourceClosure(this._addRowClickCallback, this._pietSource));
-        $(ID_BUTTON_ADD_COLUMN).addEvent('click', this._pietSourceClosure(this._addColumnClickCallback, this._pietSource));
-        $(ID_BUTTON_DELETE_ROW).addEvent('click', this._pietSourceClosure(this._deleteRowClickCallback, this._pietSource));
-        $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._pietSourceClosure(this._deleteColumnClickCallback, this._pietSource));
+        $(ID_BUTTON_ADD_ROW).addEvent('click', this._eventCallbackClosure(this._addRowClickCallback, this._pietSource));
+        $(ID_BUTTON_ADD_COLUMN).addEvent('click', this._eventCallbackClosure(this._addColumnClickCallback, this._pietSource));
+        $(ID_BUTTON_DELETE_ROW).addEvent('click', this._eventCallbackClosure(this._deleteRowClickCallback, this._pietSource));
+        $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._eventCallbackClosure(this._deleteColumnClickCallback, this._pietSource));
 
-        $(ID_BUTTON_NEW).addEvent('click', this._pietSourceClosure(this._newDocument, this._pietSource));
-        $(ID_BUTTON_LOAD).addEvent('click', this._pietSourceClosure(this._loadDocument, this._pietSource));
-        $(ID_BUTTON_SAVE).addEvent('click', this._pietSourceClosure(this._saveDocument, this._pietSource));
+        $(ID_BUTTON_NEW).addEvent('click', this._eventCallbackClosure(this._newDocument, this._pietSource));
+        $(ID_BUTTON_LOAD).addEvent('click', this._eventCallbackClosure(this._loadDocument, this._pietSource));
+        $(ID_BUTTON_SAVE).addEvent('click', this._eventCallbackClosure(this._saveDocument, this._pietSource));
 
         for (var key in COLOR) {
-            $(colorToId(COLOR[key])).addEvent('click', this._pietSourceClosure(this._selectColorClickCallback, this._pietSource, COLOR[key]));
+            $(colorToId(COLOR[key])).addEvent('click', this._eventCallbackClosure(this._selectColorClickCallback, this._pietSource, COLOR[key]));
         };
 
         this._displayTable.addObserver(this); // Init new cells' events
@@ -171,7 +171,7 @@ var Controler = new Class({
 
     _addEventCells: function(cells)
     {
-        cells.addEvent('click', this._pietSourceClosure(this._cellClickCallback, this._pietSource));
+        cells.addEvent('click', this._eventCallbackClosure(this._cellClickCallback, this._pietSource));
     },
 
     _cellClickCallback: function(event, pietSource)
@@ -225,7 +225,7 @@ var Controler = new Class({
         event.stop();
     },
 
-    _pietSourceClosure: function(fn) {
+    _eventCallbackClosure: function(fn) {
         // get arguments[1:]
         // we can't call "slice" directly because "arguments" is typed as an Object
         var args = [].slice.call(arguments, 1);
