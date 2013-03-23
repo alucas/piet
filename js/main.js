@@ -120,7 +120,8 @@ var colorToId = function _colorToId(color)
 var Controler = new Class({
     Implements: Observer,
 
-    initialize: function(pietSource, displayTable) {
+    initialize: function(pietSource, displayTable)
+    {
         this._pietSource = pietSource;
         this._displayTable = displayTable;
 
@@ -133,7 +134,8 @@ var Controler = new Class({
         $(ID_BUTTON_LOAD).addEvent('click', this._eventCallbackClosure(this._loadDocument, this._pietSource));
         $(ID_BUTTON_SAVE).addEvent('click', this._eventCallbackClosure(this._saveDocument, this._pietSource));
 
-        for (var key in COLOR) {
+        for (var key in COLOR)
+        {
             $(colorToId(COLOR[key])).addEvent('click', this._eventCallbackClosure(this._selectColorClickCallback, this._pietSource, COLOR[key]));
         };
 
@@ -183,54 +185,64 @@ var Controler = new Class({
         pietSource.drawCell(this.y, this.x);
     },
 
-    _addRowClickCallback: function(event, pietSource) {
+    _addRowClickCallback: function(event, pietSource)
+    {
         event.stop();
         
         pietSource.addRow(POSITION.BOTTOM, DEFAULT_COLOR);
     },
 
-    _addColumnClickCallback: function(event, pietSource) {
+    _addColumnClickCallback: function(event, pietSource)
+    {
         event.stop();
 
         pietSource.addColumn(POSITION.RIGHT, DEFAULT_COLOR);
     },
 
-    _deleteRowClickCallback: function(event, pietSource) {
+    _deleteRowClickCallback: function(event, pietSource)
+    {
         event.stop();
 
         pietSource.deleteRow(POSITION.BOTTOM);
     },
 
-    _deleteColumnClickCallback: function(event, pietSource) {
+    _deleteColumnClickCallback: function(event, pietSource)
+    {
         event.stop();
 
         pietSource.deleteColumn(POSITION.RIGHT);
     },
 
-    _selectColorClickCallback: function(event, pietSource, color) {
+    _selectColorClickCallback: function(event, pietSource, color)
+    {
         event.stop();
 
         pietSource.setColor(color);
     },
 
-    _newDocument: function(event, pietSource) {
+    _newDocument: function(event, pietSource)
+    {
         event.stop();
     },
 
-    _loadDocument: function(event, pietSource) {
+    _loadDocument: function(event, pietSource)
+    {
         event.stop();
     },
 
-    _saveDocument: function(event, pietSource) {
+    _saveDocument: function(event, pietSource)
+    {
         event.stop();
     },
 
-    _eventCallbackClosure: function(fn) {
+    _eventCallbackClosure: function(fn)
+    {
         // get arguments[1:]
         // we can't call "slice" directly because "arguments" is typed as an Object
         var args = [].slice.call(arguments, 1);
 
-        return function (event) {
+        return function (event)
+        {
             fn.apply(this, [event].concat(args));
         };
     },

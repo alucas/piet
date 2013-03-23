@@ -10,7 +10,8 @@ var DisplayTable = new Class({
     Extends: Observable,
     Implements: Observer,
 
-    initialize: function(pietSource, tableId) {
+    initialize: function(pietSource, tableId)
+    {
         this.parent();
 
         this._pietSource = pietSource;
@@ -79,16 +80,19 @@ var DisplayTable = new Class({
     },
 
     // Clear and rewrite the table.
-    updateTable: function(table) {
+    updateTable: function(table)
+    {
         table.empty();
 
         var table2 = new Element('table');
 
-        for (var i = 0; i < this._pietSource.getNbRow(); i++) {
+        for (var i = 0; i < this._pietSource.getNbRow(); i++)
+        {
             this._insertRow(table2, POSITION.BOTTOM, i);
         }
         
-        for (var i = 0; i < this._pietSource.getNbColumn(); i++) {
+        for (var i = 0; i < this._pietSource.getNbColumn(); i++)
+        {
             this._insertColumn(table2, POSITION.LEFT, i);
         }
 
@@ -97,23 +101,27 @@ var DisplayTable = new Class({
         this.notifyAll(SIGNAL.UPDATE_TABLE);
     },
 
-    updateCell: function(table, row, column) {
+    updateCell: function(table, row, column)
+    {
         this._getCell(this._getRow(table, row + 1), column + 1).setStyle('background-color', this._pietSource.getCellColor(row, column));
     },
 
-    insertRow: function(table, position, rowId) {
+    insertRow: function(table, position, rowId)
+    {
         var cells = this._insertRow(table, position, rowId);
 
         this.notifyAll(SIGNAL.ADD_ROW, [cells]);
     },
 
-    insertColumn: function(table, position, columnId) {
+    insertColumn: function(table, position, columnId)
+    {
         var cells = this._insertColumn(table, position, columnId);
 
         this.notifyAll(SIGNAL.ADD_COLUMN, [cells]);
     },
 
-    deleteRow: function(table, position) {
+    deleteRow: function(table, position)
+    {
         if (this._getNumberRows(table) < 2)
             return;
 
@@ -132,7 +140,8 @@ var DisplayTable = new Class({
         }
     },
 
-    deleteColumn: function(table, position) {
+    deleteColumn: function(table, position)
+    {
         if (this._getNumberCells(table) < 2)
             return;
 
@@ -141,13 +150,15 @@ var DisplayTable = new Class({
 
         if (position == POSITION.LEFT)
         {
-            for (var i = 0; i < nbRow; i++) {
+            for (var i = 0; i < nbRow; i++)
+            {
                 this._deleteCellLeft(rows[i]);
             }
         }
         else if (position == POSITION.RIGHT)
         {
-            for (var i = 0; i < nbRow; i++) {
+            for (var i = 0; i < nbRow; i++)
+            {
                 this._deleteCellRight(rows[i]);
             }
         }
@@ -162,11 +173,13 @@ var DisplayTable = new Class({
     //          Privates            //
     //******************************//
 
-    _insertRow: function(table, position, rowId) {
+    _insertRow: function(table, position, rowId)
+    {
         var nbCell = this._getNumberCells(table);
 
         var cells = new Elements();
-        for (var i = 0; i < nbCell; i++) {
+        for (var i = 0; i < nbCell; i++)
+        {
             cells.push(this._createEmptyCell().setStyle('background-color', this._pietSource.getCellColor(rowId, i)));
         }
 
@@ -187,7 +200,8 @@ var DisplayTable = new Class({
         return cells;
     },
 
-    _insertColumn: function(table, position, columnId) {
+    _insertColumn: function(table, position, columnId)
+    {
         if (!this._hasRow(table)) return;
 
         var rows = this._getRows(table);
@@ -196,13 +210,15 @@ var DisplayTable = new Class({
 
         if (position == POSITION.LEFT)
         {
-            for (var i = 0; i < nbRow; i++) {
+            for (var i = 0; i < nbRow; i++)
+            {
                 cells.push(this._insertEmptyCellLeft(rows[i]).setStyle('background-color', this._pietSource.getCellColor(i, columnId)));
             }
         }
         else if (position == POSITION.RIGHT)
         {
-            for (var i = 0; i < nbRow; i++) {
+            for (var i = 0; i < nbRow; i++)
+            {
                 cells.push(this._insertEmptyCellRight(rows[i]).setStyle('background-color', this._pietSource.getCellColor(i, columnId)));
             }
         }
@@ -215,77 +231,95 @@ var DisplayTable = new Class({
         return cells;
     },
 
-    _getRows: function(table) {
+    _getRows: function(table)
+    {
     	return table.getChildren('.row');
     },
 
-    _getRow: function(table, index) {
+    _getRow: function(table, index)
+    {
         return table.getChildren('.row:nth-child('+index+')')[0];
     },
 
-    _getCells: function(row) {
+    _getCells: function(row)
+    {
     	return row.getChildren('.cell');
     },
 
-    _getCell: function(row, index) {
+    _getCell: function(row, index)
+    {
         return row.getChildren('.cell:nth-child('+index+')')[0];
     },
 
-    _getFirstRow: function(table) {
+    _getFirstRow: function(table)
+    {
     	return table.getChildren('.row:first-child')[0];
     },
 
-    _getLastRow: function(table) {
+    _getLastRow: function(table)
+    {
     	return table.getChildren('.row:last-child')[0];
     },
 
-    _hasRow: function(table) {
+    _hasRow: function(table)
+    {
         return table.getChildren('.row').length > 0;
     },
 
-    _getNumberCells: function(table) {
+    _getNumberCells: function(table)
+    {
         if (table.getChildren('.row').length <= 0) return 0;
 
         return table.getChildren('.row:first-child > .cell').length;
     },
 
-    _getNumberRows: function(table) {
+    _getNumberRows: function(table)
+    {
         return table.getChildren('.row').length;
     },
 
-    _insertEmptyRowTop: function(table) {
+    _insertEmptyRowTop: function(table)
+    {
         return new Element('div.row').inject(table, 'top');
     },
 
-    _insertEmptyRowBottom: function(table) {
+    _insertEmptyRowBottom: function(table)
+    {
         return new Element('div.row').inject(table, 'bottom');
     },
 
-    _insertEmptyCellLeft: function(row) {
+    _insertEmptyCellLeft: function(row)
+    {
         return new Element('div.cell').inject(row, 'top');
     },
 
-    _insertEmptyCellRight: function(row) {
+    _insertEmptyCellRight: function(row)
+    {
         return new Element('div.cell').inject(row, 'bottom');
     },
 
-    _createEmptyCell: function() {
+    _createEmptyCell: function()
+    {
         return Element('div.cell');
     },
 
-    _deleteRowTop: function(table) {
+    _deleteRowTop: function(table)
+    {
         table.getChildren('.row:first-child').dispose();
     },
 
-    _deleteRowBottom: function(table) {
+    _deleteRowBottom: function(table)
+    {
         table.getChildren('.row:last-child').dispose();
     },
 
-    _deleteCellLeft: function(row) {
+    _deleteCellLeft: function(row)
+    {
         row.getChildren('.cell:first-child').dispose();
     },
 
-    _deleteCellRight: function(row) {
+    _deleteCellRight: function(row)
+    {
         row.getChildren('.cell:last-child').dispose();
     }
 });
@@ -293,7 +327,8 @@ var DisplayTable = new Class({
 var DisplayMenu = new Class({
     Implements: Observer,
 
-    initialize: function(pietSource) {
+    initialize: function(pietSource)
+    {
         this._pietSource = pietSource;
 
         this._pietSource.addObserver(this);
@@ -328,7 +363,8 @@ var DisplayMenu = new Class({
         }
     },
 
-    changeColor: function(oldColor, newColor) {
+    changeColor: function(oldColor, newColor)
+    {
         if(oldColor)
         {
             $(colorToId(oldColor)).removeClass('colorSelected');
