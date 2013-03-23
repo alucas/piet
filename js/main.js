@@ -12,6 +12,9 @@ var ID_BUTTON_ADD_ROW = 'buttonAddRow';
 var ID_BUTTON_ADD_COLUMN = 'buttonAddColumn';
 var ID_BUTTON_DELETE_ROW = 'buttonDeleteRow';
 var ID_BUTTON_DELETE_COLUMN = 'buttonDeleteColumn';
+var ID_BUTTON_NEW = 'buttonNew';
+var ID_BUTTON_LOAD = 'buttonLoad';
+var ID_BUTTON_SAVE = 'buttonSave';
 
 var ID_BUTTON_COLOR_WHITE = 'colorWhite';
 var ID_BUTTON_COLOR_BLACK = 'colorBlack';
@@ -126,6 +129,10 @@ var Controler = new Class({
         $(ID_BUTTON_DELETE_ROW).addEvent('click', this._pietSourceClosure(this._deleteRowClickCallback, this._pietSource));
         $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._pietSourceClosure(this._deleteColumnClickCallback, this._pietSource));
 
+        $(ID_BUTTON_NEW).addEvent('click', this._pietSourceClosure(this._newDocument, this._pietSource));
+        $(ID_BUTTON_LOAD).addEvent('click', this._pietSourceClosure(this._loadDocument, this._pietSource));
+        $(ID_BUTTON_SAVE).addEvent('click', this._pietSourceClosure(this._saveDocument, this._pietSource));
+
         for (var key in COLOR) {
             $(colorToId(COLOR[key])).addEvent('click', this._pietSourceClosure(this._selectColorClickCallback, this._pietSource, COLOR[key]));
         };
@@ -204,6 +211,18 @@ var Controler = new Class({
         event.stop();
 
         pietSource.setColor(color);
+    },
+
+    _newDocument: function(event, pietSource) {
+        event.stop();
+    },
+
+    _loadDocument: function(event, pietSource) {
+        event.stop();
+    },
+
+    _saveDocument: function(event, pietSource) {
+        event.stop();
     },
 
     _pietSourceClosure: function(fn) {
