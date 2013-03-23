@@ -516,43 +516,43 @@ footer
 .button
 {
     background-color: @emerald;
+
     border-radius: 5px;
     border: 0px;
-    color: white;
-    font-family: sans-serif;
-    font-size:10pt;
-    padding:0.5em;
-    text-decoration:none;
 
-    -webkit-transition: background-color 0.5s;
+    font-size: 0pt;
+
+    padding: 8px;
+
+    .transition(background-color, 0.5s);
 }
 
 .buttonGroup
 {
     display:inline-block;
-    font-size:0pt;
+    font-size: 0pt;
 }
 
 .buttonGroup>.button
 {
-    border-radius:0px;
+    border-radius: 0px;
 }
 
 .buttonGroup>.button+.button
 {
-    border-left:none;
+    border-left: none;
 }
 
 .buttonGroup>.button:first-child
 {
-    border-top-left-radius:3px;
-    border-bottom-left-radius:3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .buttonGroup>.button:last-child
 {
-    border-top-right-radius:3px;
-    border-bottom-right-radius:3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 .button:hover
@@ -571,24 +571,39 @@ footer
 
 [class^="icon-"]
 {
-    display:inline-block;
-    width:18px;
-    height:18px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
 
-    background-size:18px;
-    opacity:0.5;
-    
-    vertical-align:middle;
+    background-size: 16px;
+    background-repeat: no-repeat;
+
+    opacity: 0.5;
 }
 
 .icon-add
 {
-    background-image:url(../img/icon/Batch-master/SVG/add.svg);
+    background-image: url(../img/icon/Batch-master/SVG/add.svg);
 }
 
 .icon-remove
 {
-    background-image:url(../img/icon/Batch-master/SVG/remove.svg);
+    background-image: url(../img/icon/Batch-master/SVG/remove.svg);
+}
+
+.icon-new
+{
+    background-image: url(../img/icon/Batch-master/SVG/document.svg);
+}
+
+.icon-load
+{
+    background-image: url(../img/icon/Batch-master/SVG/open.svg);
+}
+
+.icon-save
+{
+    background-image: url(../img/icon/Batch-master/SVG/save.svg);
 }
 
 /* ========== Scrollbar ========== */
