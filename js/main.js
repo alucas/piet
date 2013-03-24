@@ -233,6 +233,30 @@ var Controler = new Class({
     _saveDocument: function(event, pietSource)
     {
         event.stop();
+
+        var nbRow = pietSource.getNbRow();
+        var nbColumn = pietSource.getNbColumn();
+
+        var p = new PNGlib(nbColumn, nbRow, 256); // construcor takes width, height and color-depth
+        var background = p.color(0, 0, 0, 0); // set the background transparent
+
+        for (var y = nbRow - 1; y >= 0; y--)
+        {
+            for (var x = nbColumn - 1; x >= 0; x--)
+            {
+                p.buffer[p.index(x, y)] = p.color.apply(p, pietSource.getCellColor(y, x));
+            }
+        }
+
+        var myMBox = new mBox({
+            content: '<figure>  \
+                        <img class="center" style="border:1px solid lightgrey;" src="data:image/png;base64,'+p.getBase64()+'" alt="Your piet program!">    \
+                        <figcaption style="text-align:center;">Right click ⇨ Save as</figcaption>   \
+                    </figure>',
+            overlay: true
+        });
+
+        myMBox.open();
     },
 
     _eventCallbackClosure: function(fn)
