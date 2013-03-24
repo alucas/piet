@@ -1,0 +1,86 @@
+.mBoxButtonContainer button
+{
+	-webkit-transition: .1s linear border;
+	-moz-transition: .1s linear border;
+	-ms-transition: .1s linear border;
+	-o-transition: .1s linear border;
+	transition: .1s linear border;
+}
+
+/* buttons */
+
+.mBoxButtonContainer button
+{
+	position: relative;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	height: 29px;
+	padding: 0px 15px;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.mBoxButtonContainer button:active
+{
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.26) !important;
+}
+
+/* grey button */
+
+.mBoxButtonContainer button.button_grey
+{
+	color: #707070;
+	text-shadow: 0 1px 1px #fff;
+	border: 1px solid #ccc;
+	border-bottom: 1px solid #c0c0c0;
+	background-color: #ececec;
+	background-image: -webkit-linear-gradient(top,#fbfbfb,#e4e4e4);
+	background-image: -moz-linear-gradient(top,#fbfbfb,#e4e4e4);
+	background-image: -ms-linear-gradient(top,#fbfbfb,#e4e4e4);
+	background-image: -o-linear-gradient(top,#fbfbfb,#e4e4e4);
+	background-image: linear-gradient(top,#fbfbfb,#e4e4e4);
+}
+
+.mBoxButtonContainer button.grey_grey:hover
+{
+	border: 1px solid #b5b5b5;
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 1px 1px rgba(0, 0, 0, 0.07);
+}
+
+.mBoxButtonContainer button.grey_grey:active
+{
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.26) !important;
+	border: 1px solid #a0a0a0;
+	border-bottom: 1px solid #cacaca;
+	background: #e5e5e5;
+}
+
+/* green button */
+
+.mBoxButtonContainer button.button_green
+{
+	color: #fff;
+	text-shadow: 0 -1px 1px #779a35;
+	border: 1px solid #779a35;
+	border-bottom: 1px solid #708542;
+	background-color: #83af31;
+	background-image: -webkit-linear-gradient(top,#a9d05b,#77a423);
+	background-image: -moz-linear-gradient(top,#a9d05b,#77a423);
+	background-image: -ms-linear-gradient(top,#a9d05b,#77a423);
+	background-image: -o-linear-gradient(top,#a9d05b,#77a423);
+	background-image: linear-gradient(top,#a9d05b,#77a423);
+}
+
+.mBoxButtonContainer button.button_green:hover
+{
+	border: 1px solid #577027;
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.mBoxButtonContainer button.button_green:active
+{
+	border: 1px solid #6c8c30;
+	border-bottom: 1px solid #779a35;
+	background: #84af31;
+}

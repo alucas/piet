@@ -223,6 +223,32 @@ var Controler = new Class({
     _newDocument: function(event, pietSource)
     {
         event.stop();
+
+        new mBox.Modal({
+            title: 'Create new document',
+            content: 'The previous document will be erased',
+            addClass:
+            {
+                wrapper: 'Confirm'
+            },
+            buttons:
+            [
+                {
+                    title: 'Cancel',
+                    addClass: 'button_grey'
+                },
+                {
+                    title: 'Go',
+                    addClass: 'button_green',
+                    event: function()
+                    {
+                        pietSource.fill(DEFAULT_COLOR);
+
+                        this.close();
+                    }
+                }
+            ],
+        }).open();
     },
 
     _loadDocument: function(event, pietSource)

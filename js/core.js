@@ -70,6 +70,19 @@ var PietSource = new Class({
         this.notifyAll(SIGNAL.CHANGE_COLOR, [null, this._color]);
     },
 
+    fill: function(color)
+    {
+        for (var row = 0; row < this._nbRow; row++)
+        {
+            for (var column = 0; column < this._nbColumn; column++)
+            {
+                this._source[row][column] = color;
+            }
+        }
+
+        this.notifyAll(SIGNAL.UPDATE_TABLE);
+    },
+
     getCellColor: function(row, column)
     {
         if (0 > row || row >= this._nbRow || 0 > column || column >= this._nbColumn)
