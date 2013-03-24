@@ -250,13 +250,15 @@ var Controler = new Class({
 
 // ---------------------------------------------
 
-var pietSource = new PietSource();
-var displayTable = new DisplayTable(pietSource, ID_SOURCE_PIET);
-var displayMenu = new DisplayMenu(pietSource);
-var controler = new Controler(pietSource, displayTable);
+window.addEvent('domready', function() {
+    var pietSource = new PietSource();
+    var displayTable = new DisplayTable(pietSource, ID_SOURCE_PIET);
+    var displayMenu = new DisplayMenu(pietSource);
+    var controler = new Controler(pietSource, displayTable);
 
-pietSource.init(DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_PIETSOURCE_WIDTH, DEFAULT_COLOR);
-pietSource.setColor(COLOR.BLACK);
+    pietSource.init(DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_PIETSOURCE_WIDTH, DEFAULT_COLOR);
+    pietSource.setColor(COLOR.BLACK);
+});
 
 /*
 var start = new Date().getTime();
