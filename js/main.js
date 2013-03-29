@@ -12,6 +12,9 @@ var ID_BUTTON_ADD_ROW = 'buttonAddRow';
 var ID_BUTTON_ADD_COLUMN = 'buttonAddColumn';
 var ID_BUTTON_DELETE_ROW = 'buttonDeleteRow';
 var ID_BUTTON_DELETE_COLUMN = 'buttonDeleteColumn';
+var ID_BUTTON_NEW = 'buttonNew';
+var ID_BUTTON_LOAD = 'buttonLoad';
+var ID_BUTTON_SAVE = 'buttonSave';
 
 var ID_BUTTON_COLOR_WHITE = 'colorWhite';
 var ID_BUTTON_COLOR_BLACK = 'colorBlack';
@@ -33,8 +36,6 @@ var ID_BUTTON_COLOR_DARK_GREEN = 'colorDarkGreen';
 var ID_BUTTON_COLOR_DARK_CYAN = 'colorDarkCyan';
 var ID_BUTTON_COLOR_DARK_BLUE = 'colorDarkBlue';
 var ID_BUTTON_COLOR_DARK_MAGENTA = 'colorDarkMagenta';
-
-var ID_COLOR_SELECTED = "colorSelected";
 
 var POSITION = {
     TOP: 0,
@@ -85,24 +86,58 @@ var DEFAULT_PIETSOURCE_HEIGHT = 10;
 
 // ---------------------------------------------
 
+var colorToId = function _colorToId(color)
+{
+    switch(color)
+    {
+        case COLOR.WHITE: return ID_BUTTON_COLOR_WHITE;
+        case COLOR.BLACK: return ID_BUTTON_COLOR_BLACK;
+        case COLOR.RED: return ID_BUTTON_COLOR_RED;
+        case COLOR.YELLOW: return ID_BUTTON_COLOR_YELLOW;
+        case COLOR.GREEN: return ID_BUTTON_COLOR_GREEN;
+        case COLOR.CYAN: return ID_BUTTON_COLOR_CYAN;
+        case COLOR.BLUE: return ID_BUTTON_COLOR_BLUE;
+        case COLOR.MAGENTA: return ID_BUTTON_COLOR_MAGENTA;
+        case COLOR.LIGHT_RED: return ID_BUTTON_COLOR_LIGHT_RED;
+        case COLOR.LIGHT_YELLOW: return ID_BUTTON_COLOR_LIGHT_YELLOW;
+        case COLOR.LIGHT_GREEN: return ID_BUTTON_COLOR_LIGHT_GREEN;
+        case COLOR.LIGHT_CYAN: return ID_BUTTON_COLOR_LIGHT_CYAN;
+        case COLOR.LIGHT_BLUE: return ID_BUTTON_COLOR_LIGHT_BLUE;
+        case COLOR.LIGHT_MAGENTA: return ID_BUTTON_COLOR_LIGHT_MAGENTA;
+        case COLOR.DARK_RED: return ID_BUTTON_COLOR_DARK_RED;
+        case COLOR.DARK_YELLOW: return ID_BUTTON_COLOR_DARK_YELLOW;
+        case COLOR.DARK_GREEN: return ID_BUTTON_COLOR_DARK_GREEN;
+        case COLOR.DARK_CYAN: return ID_BUTTON_COLOR_DARK_CYAN;
+        case COLOR.DARK_BLUE: return ID_BUTTON_COLOR_DARK_BLUE;
+        case COLOR.DARK_MAGENTA: return ID_BUTTON_COLOR_DARK_MAGENTA;
+    }
+
+    return null;
+}
+
+// ---------------------------------------------
+
 var Controler = new Class({
     Implements: Observer,
 
-    initialize: function(pietSource, displayTable) {
+    initialize: function(pietSource, displayTable)
+    {
         this._pietSource = pietSource;
         this._displayTable = displayTable;
 
-        $(ID_BUTTON_ADD_ROW).addEvent('click', this._pietSourceClosure(this._addRowClickCallback, this._pietSource));
-        $(ID_BUTTON_ADD_COLUMN).addEvent('click', this._pietSourceClosure(this._addColumnClickCallback, this._pietSource));
-        $(ID_BUTTON_DELETE_ROW).addEvent('click', this._pietSourceClosure(this._deleteRowClickCallback, this._pietSource));
-        $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._pietSourceClosure(this._deleteColumnClickCallback, this._pietSource));
+        $(ID_BUTTON_ADD_ROW).addEvent('click', this._eventCallbackClosure(this._addRowClickCallback, this._pietSource));
+        $(ID_BUTTON_ADD_COLUMN).addEvent('click', this._eventCallbackClosure(this._addColumnClickCallback, this._pietSource));
+        $(ID_BUTTON_DELETE_ROW).addEvent('click', this._eventCallbackClosure(this._deleteRowClickCallback, this._pietSource));
+        $(ID_BUTTON_DELETE_COLUMN).addEvent('click', this._eventCallbackClosure(this._deleteColumnClickCallback, this._pietSource));
 
-        var colorsC = [COLOR.WHITE, COLOR.BLACK, COLOR.RED, COLOR.GREEN, COLOR.BLUE, COLOR.CYAN, COLOR.MAGENTA, COLOR.YELLOW, COLOR.DARK_RED, COLOR.DARK_GREEN, COLOR.DARK_BLUE, COLOR.DARK_CYAN, COLOR.DARK_MAGENTA, COLOR.DARK_YELLOW, COLOR.LIGHT_RED, COLOR.LIGHT_GREEN, COLOR.LIGHT_BLUE, COLOR.LIGHT_CYAN, COLOR.LIGHT_MAGENTA, COLOR.LIGHT_YELLOW];
-        var colorsE = [ID_BUTTON_COLOR_WHITE, ID_BUTTON_COLOR_BLACK, ID_BUTTON_COLOR_RED, ID_BUTTON_COLOR_GREEN, ID_BUTTON_COLOR_BLUE, ID_BUTTON_COLOR_CYAN, ID_BUTTON_COLOR_MAGENTA, ID_BUTTON_COLOR_YELLOW, ID_BUTTON_COLOR_DARK_RED, ID_BUTTON_COLOR_DARK_GREEN, ID_BUTTON_COLOR_DARK_BLUE, ID_BUTTON_COLOR_DARK_CYAN, ID_BUTTON_COLOR_DARK_MAGENTA, ID_BUTTON_COLOR_DARK_YELLOW, ID_BUTTON_COLOR_LIGHT_RED, ID_BUTTON_COLOR_LIGHT_GREEN, ID_BUTTON_COLOR_LIGHT_BLUE, ID_BUTTON_COLOR_LIGHT_CYAN, ID_BUTTON_COLOR_LIGHT_MAGENTA, ID_BUTTON_COLOR_LIGHT_YELLOW];
-        for (var i = colorsE.length - 1; i >= 0; i--) {
-            $(colorsE[i]).addEvent('click', this._pietSourceClosure(this._selectColorClickCallback, this._pietSource, colorsC[i]));
+        $(ID_BUTTON_NEW).addEvent('click', this._eventCallbackClosure(this._newDocument, this._pietSource));
+        $(ID_BUTTON_LOAD).addEvent('click', this._eventCallbackClosure(this._loadDocument, this._pietSource));
+        $(ID_BUTTON_SAVE).addEvent('click', this._eventCallbackClosure(this._saveDocument, this._pietSource));
+
+        for (var key in COLOR)
+        {
+            $(colorToId(COLOR[key])).addEvent('click', this._eventCallbackClosure(this._selectColorClickCallback, this._pietSource, COLOR[key]));
         };
-
 
         this._displayTable.addObserver(this); // Init new cells' events
     },
@@ -138,7 +173,7 @@ var Controler = new Class({
 
     _addEventCells: function(cells)
     {
-        cells.addEvent('click', this._pietSourceClosure(this._cellClickCallback, this._pietSource));
+        cells.addEvent('click', this._eventCallbackClosure(this._cellClickCallback, this._pietSource));
     },
 
     _cellClickCallback: function(event, pietSource)
@@ -150,42 +185,114 @@ var Controler = new Class({
         pietSource.drawCell(this.y, this.x);
     },
 
-    _addRowClickCallback: function(event, pietSource) {
+    _addRowClickCallback: function(event, pietSource)
+    {
         event.stop();
         
         pietSource.addRow(POSITION.BOTTOM, DEFAULT_COLOR);
     },
 
-    _addColumnClickCallback: function(event, pietSource) {
+    _addColumnClickCallback: function(event, pietSource)
+    {
         event.stop();
 
         pietSource.addColumn(POSITION.RIGHT, DEFAULT_COLOR);
     },
 
-    _deleteRowClickCallback: function(event, pietSource) {
+    _deleteRowClickCallback: function(event, pietSource)
+    {
         event.stop();
 
         pietSource.deleteRow(POSITION.BOTTOM);
     },
 
-    _deleteColumnClickCallback: function(event, pietSource) {
+    _deleteColumnClickCallback: function(event, pietSource)
+    {
         event.stop();
 
         pietSource.deleteColumn(POSITION.RIGHT);
     },
 
-    _selectColorClickCallback: function(event, pietSource, color) {
+    _selectColorClickCallback: function(event, pietSource, color)
+    {
         event.stop();
 
         pietSource.setColor(color);
     },
 
-    _pietSourceClosure: function(fn) {
+    _newDocument: function(event, pietSource)
+    {
+        event.stop();
+
+        new mBox.Modal({
+            title: 'Create new document',
+            content: 'The previous document will be erased',
+            addClass:
+            {
+                wrapper: 'Confirm'
+            },
+            buttons:
+            [
+                {
+                    title: 'Cancel',
+                    addClass: 'button_grey'
+                },
+                {
+                    title: 'Go',
+                    addClass: 'button_green',
+                    event: function()
+                    {
+                        pietSource.fill(DEFAULT_COLOR);
+
+                        this.close();
+                    }
+                }
+            ],
+        }).open();
+    },
+
+    _loadDocument: function(event, pietSource)
+    {
+        event.stop();
+    },
+
+    _saveDocument: function(event, pietSource)
+    {
+        event.stop();
+
+        var nbRow = pietSource.getNbRow();
+        var nbColumn = pietSource.getNbColumn();
+
+        var p = new PNGlib(nbColumn, nbRow, 256); // construcor takes width, height and color-depth
+        var background = p.color(0, 0, 0, 0); // set the background transparent
+
+        for (var y = nbRow - 1; y >= 0; y--)
+        {
+            for (var x = nbColumn - 1; x >= 0; x--)
+            {
+                p.buffer[p.index(x, y)] = p.color.apply(p, pietSource.getCellColor(y, x));
+            }
+        }
+
+        var myMBox = new mBox({
+            content: '<figure>  \
+                        <img class="center" style="border:1px solid lightgrey;" src="data:image/png;base64,'+p.getBase64()+'" alt="Your piet program!">    \
+                        <figcaption style="text-align:center;">Right click ⇨ Save as</figcaption>   \
+                    </figure>',
+            overlay: true
+        });
+
+        myMBox.open();
+    },
+
+    _eventCallbackClosure: function(fn)
+    {
         // get arguments[1:]
         // we can't call "slice" directly because "arguments" is typed as an Object
-        var args = [].slice.call(arguments, 1, arguments.length + 1);
+        var args = [].slice.call(arguments, 1);
 
-        return function (event) {
+        return function (event)
+        {
             fn.apply(this, [event].concat(args));
         };
     },
@@ -193,12 +300,15 @@ var Controler = new Class({
 
 // ---------------------------------------------
 
-var pietSource = new PietSource();
-var displayTable = new DisplayTable(pietSource, ID_SOURCE_PIET);
-var displayMenu = new DisplayMenu(pietSource, ID_COLOR_SELECTED);
-var controler = new Controler(pietSource, displayTable);
+window.addEvent('domready', function() {
+    var pietSource = new PietSource();
+    var displayTable = new DisplayTable(pietSource, ID_SOURCE_PIET);
+    var displayMenu = new DisplayMenu(pietSource);
+    var controler = new Controler(pietSource, displayTable);
 
-pietSource.init(DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_PIETSOURCE_WIDTH, DEFAULT_COLOR);
+    pietSource.init(DEFAULT_PIETSOURCE_HEIGHT, DEFAULT_PIETSOURCE_WIDTH, DEFAULT_COLOR);
+    pietSource.setColor(COLOR.BLACK);
+});
 
 /*
 var start = new Date().getTime();

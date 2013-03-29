@@ -13,7 +13,12 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="js/vendor/mbox/assets/mBoxCore.css">
+        <link rel="stylesheet" href="js/vendor/mbox/assets/mBoxModal.css">
+        <link rel="stylesheet" href="css/mForm.css">
+
         <link rel="stylesheet" href="css/main.css">
+
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -26,7 +31,7 @@
         <header>
         </header>
         <div id="main">
-            <div id="toolsContainer">
+            <menu id="toolsContainer">
                 <div class="box">
                     <div class="boxLine">
                         <div class="label">Row</div>
@@ -43,52 +48,54 @@
                         </div>
                     </div>
                 </div>
-                <div class="box">
-                    <div id="colorSelected"></div>
-                </div>
                 <div class="box colorsBox">
-                    <div id="colorWhite"></div>
-                    <div id="colorBlack"></div>
-                    <div id="colorRed"></div>
-                    <div id="colorYellow"></div>
-                    <div id="colorGreen"></div>
-                    <div id="colorCyan"></div>
-                    <div id="colorBlue"></div>
-                    <div id="colorMagenta"></div>
-                    <div id="colorLightRed"></div>
-                    <div id="colorLightYellow"></div>
-                    <div id="colorLightGreen"></div>
-                    <div id="colorLightCyan"></div>
-                    <div id="colorLightBlue"></div>
-                    <div id="colorLightMagenta"></div>
-                    <div id="colorDarkRed"></div>
-                    <div id="colorDarkYellow"></div>
-                    <div id="colorDarkGreen"></div>
-                    <div id="colorDarkCyan"></div>
-                    <div id="colorDarkBlue"></div>
-                    <div id="colorDarkMagenta"></div>
+                    <button id="colorWhite"></button>
+                    <button id="colorBlack"></button>
+                    <button id="colorRed"></button>
+                    <button id="colorYellow"></button>
+                    <button id="colorGreen"></button>
+                    <button id="colorCyan"></button>
+                    <button id="colorBlue"></button>
+                    <button id="colorMagenta"></button>
+                    <button id="colorLightRed"></button>
+                    <button id="colorLightYellow"></button>
+                    <button id="colorLightGreen"></button>
+                    <button id="colorLightCyan"></button>
+                    <button id="colorLightBlue"></button>
+                    <button id="colorLightMagenta"></button>
+                    <button id="colorDarkRed"></button>
+                    <button id="colorDarkYellow"></button>
+                    <button id="colorDarkGreen"></button>
+                    <button id="colorDarkCyan"></button>
+                    <button id="colorDarkBlue"></button>
+                    <button id="colorDarkMagenta"></button>
                 </div>
                 <div class="box instructionsBox">
-                    <div id="">nop</div>
-                    <div id="">push</div>
-                    <div id="">pop</div>
-                    <div id="">add</div>
-                    <div id="">sub</div>
-                    <div id="">mult</div>
-                    <div id="">div</div>
-                    <div id="">mod</div>
-                    <div id="">not</div>
-                    <div id="">greater</div>
-                    <div id="">pointer</div>
-                    <div id="">switch</div>
-                    <div id="">dup</div>
-                    <div id="">roll</div>
-                    <div id="">inN</div>
-                    <div id="">inC</div>
-                    <div id="">outN</div>
-                    <div id="">outC</div>
+                    <button id="">nop</button>
+                    <button id="">push</button>
+                    <button id="">pop</button>
+                    <button id="">add</button>
+                    <button id="">sub</button>
+                    <button id="">mult</button>
+                    <button id="">div</button>
+                    <button id="">mod</button>
+                    <button id="">not</button>
+                    <button id="">greater</button>
+                    <button id="">pointer</button>
+                    <button id="">switch</button>
+                    <button id="">dup</button>
+                    <button id="">roll</button>
+                    <button id="">inN</button>
+                    <button id="">inC</button>
+                    <button id="">outN</button>
+                    <button id="">outC</button>
                 </div>
-            </div>
+                <div class="box">
+                    <button type="button" class="button" id="buttonNew"><i class="icon-new"></i></button>
+                    <button type="button" class="button" id="buttonLoad"><i class="icon-load"></i></button>
+                    <button type="button" class="button" id="buttonSave"><i class="icon-save"></i></button>
+                </div>
+            </menu>
             <div id="sourcePietContainer">
             </div>
         </div>
@@ -102,11 +109,15 @@
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/mootools/1.4.5/mootools-core-full-compat-yc.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/mootools-more/1.4.0.1/mootools-more-yui-compressed.js"></script>
-        <script>window.MooTools || document.write('<script src="js/vendor/mootools-core-1.4.5-full-compat-yc.js"><\/script>')</script>
+        <script>window.MooTools || document.write('<script src="js/vendor/mootools-core-1.4.5-full-nocompat-yc.js"><\/script>')</script>
+        <script>window.MooTools.More || document.write('<script src="js/vendor/mootools-more-1.4.0.1-yc.js"><\/script>')</script>
 
         <script src="js/plugins.js"></script>
 
-        <script src="js/coordinate.js"></script>
+        <script src="js/vendor/mbox/mBox.Core.js"></script>
+        <script src="js/vendor/mbox/mBox.Modal.js"></script>
+        <script src="js/vendor/coordinate.js"></script>
+        <script src="js/vendor/pnglib.js"></script>
         
         <script src="js/core.js"></script>
         <script src="js/display.js"></script>

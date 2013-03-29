@@ -7,16 +7,20 @@ Copyright 2012 Antoine LUCAS
 */
 
 var Observable = new Class({
-	initialize: function() {
+	initialize: function()
+    {
 		this._observers = new Array();
 	},
 
-	addObserver: function(observer) {
+	addObserver: function(observer)
+    {
 		this._observers.push(observer);
 	},
 
-	notifyAll: function(signalType, args) {
-		Array.each(this._observers, function(observer){
+	notifyAll: function(signalType, args)
+    {
+		Array.each(this._observers, function(observer)
+            {
     			observer.update(signalType, args);
     		}
     	);
@@ -24,7 +28,8 @@ var Observable = new Class({
 });
 
 var Observer = new Class({
-    update: function(signalType, args) {
+    update: function(signalType, args)
+    {
         console.log("This function need to be redefined");
     }
 });
@@ -32,7 +37,8 @@ var Observer = new Class({
 var PietSource = new Class({
 	Extends: Observable,
 
-    initialize: function() {
+    initialize: function()
+    {
     	this.parent();
 
         this._source = new Array();
@@ -42,15 +48,18 @@ var PietSource = new Class({
     //          Public              //
     //******************************//
 
-    init: function(nbRow, nbColumn, initialColor) {
+    init: function(nbRow, nbColumn, initialColor)
+    {
     	this._nbRow = nbRow;
     	this._nbColumn = nbColumn;
         this._color = initialColor;
 
-		for (var i = 0; i < this._nbRow; i++) {
+		for (var i = 0; i < this._nbRow; i++)
+        {
 			var row = new Array();
 
-			for (var j = 0; j < this._nbColumn; j++) {
+			for (var j = 0; j < this._nbColumn; j++)
+            {
 				row.push(initialColor);
 			}
 
@@ -58,10 +67,24 @@ var PietSource = new Class({
 		}
 
 		this.notifyAll(SIGNAL.UPDATE_TABLE);
-        this.notifyAll(SIGNAL.CHANGE_COLOR, this._color);
+        this.notifyAll(SIGNAL.CHANGE_COLOR, [null, this._color]);
     },
 
-    getCellColor: function(row, column) {
+    fill: function(color)
+    {
+        for (var row = 0; row < this._nbRow; row++)
+        {
+            for (var column = 0; column < this._nbColumn; column++)
+            {
+                this._source[row][column] = color;
+            }
+        }
+
+        this.notifyAll(SIGNAL.UPDATE_TABLE);
+    },
+
+    getCellColor: function(row, column)
+    {
         if (0 > row || row >= this._nbRow || 0 > column || column >= this._nbColumn)
             return;
 
@@ -77,27 +100,33 @@ var PietSource = new Class({
         this.notifyAll(SIGNAL.UPDATE_CELL, [row, column]);
     },
 
-    setColor: function(color) {
+    setColor: function(color)
+    {
         if (!color)
             return;
 
+        var oldColor = this._color;
         this._color = color;
 
-        this.notifyAll(SIGNAL.CHANGE_COLOR, this._color);
+        this.notifyAll(SIGNAL.CHANGE_COLOR, [oldColor, this._color]);
     },
 
-    getNbRow: function() {
+    getNbRow: function()
+    {
         return this._nbRow;
     },
 
-    getNbColumn: function() {
+    getNbColumn: function()
+    {
         return this._nbColumn;
     },
 
-    addRow: function(position, initialColor) {
+    addRow: function(position, initialColor)
+    {
     	var row = new Array()
 
-        for (var j = 0; j < this._nbColumn; j++) {
+        for (var j = 0; j < this._nbColumn; j++)
+        {
 			row.push(initialColor);
 		}
 
@@ -120,7 +149,8 @@ var PietSource = new Class({
     	this.notifyAll(SIGNAL.ADD_ROW, [position, (position == POSITION.TOP)? 0 : this._nbRow - 1]);
     },
 
-    deleteRow: function(position) {
+    deleteRow: function(position)
+    {
     	if (this._nbRow < 2)
     		return;
 
@@ -143,16 +173,19 @@ var PietSource = new Class({
     	this.notifyAll(SIGNAL.DELETE_ROW, [position]);
     },
 
-    addColumn: function(position, initialColor) {
+    addColumn: function(position, initialColor)
+    {
     	if (position == POSITION.LEFT)
     	{
-    		for (var i = 0; i < this._nbRow; i++) {
+    		for (var i = 0; i < this._nbRow; i++)
+            {
 				this._source[i].unshift(initialColor);
 			}
     	}
     	else if (position == POSITION.RIGHT)
     	{
-    		for (var i = 0; i < this._nbRow; i++) {
+    		for (var i = 0; i < this._nbRow; i++)
+            {
 				this._source[i].push(initialColor);
 			}
     	}
@@ -167,19 +200,22 @@ var PietSource = new Class({
     	this.notifyAll(SIGNAL.ADD_COLUMN, [position, (position == POSITION.LEFT)? 0 : this._nbColumn - 1]);
     },
 
-    deleteColumn: function(position) {
+    deleteColumn: function(position)
+    {
     	if (this._nbColumn < 2)
     		return;
 
     	if (position == POSITION.LEFT)
     	{
-    		for (var i = 0; i < this._nbRow; i++) {
+    		for (var i = 0; i < this._nbRow; i++)
+            {
 				this._source[i].shift();
 			}
     	}
     	else if (position == POSITION.RIGHT)
     	{
-    		for (var i = 0; i < this._nbRow; i++) {
+    		for (var i = 0; i < this._nbRow; i++)
+            {
 				this._source[i].pop();
 			}
     	}
@@ -194,8 +230,10 @@ var PietSource = new Class({
     	this.notifyAll(SIGNAL.DELETE_COLUMN, [position]);
     },
 
-    log: function() {
-  		for (var i = this._source.length - 1; i >= 0; i--) {
+    log: function()
+    {
+  		for (var i = this._source.length - 1; i >= 0; i--)
+        {
 			console.log(this._source[i]);
 		}
 	}
